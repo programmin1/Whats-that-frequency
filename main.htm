@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>What is that frequency?</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.12.0/underscore-min.js"></script>
+    <script>
+        var k = 1000,
+            m = 1000000,
+            ranges = [{
+                    name: '2200 Meter Ham',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 135.7 * k,
+                    max: 137.8 * k,
+                    description: 'Amateur radio band for General or higher with special permission.'
+                }, {
+                    name: '630 Meter Ham',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 472 * k,
+                    max: 479 * k,
+                    description: 'Amateur radio band for General or higher with special permission.'
+                }, {
+                    name: '160 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 1.8 * m,
+                    max: 2 * m,
+                    description: 'Amateur radio band for General or higher.'
+                }, {
+                    name: '80 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 3.525 * m,
+                    max: 3.6 * m,
+                    description: 'Amateur radio band for Technician cw.'
+                }, {
+                    name: '80 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 3.525 * m,
+                    max: 4 * m,
+                    description: 'Amateur radio band for General or higher.'
+                }, {
+                    name: '40 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 7.025 * m,
+                    max: 7.125 * m,
+                    description: 'Amateur radio band for Technician CW.'
+                }, {
+                    name: '40 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 7.175 * m,
+                    max: 7.3 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '30 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 10.1 * m,
+                    max: 10.15 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '20 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 14.025 * m,
+                    max: 14.15 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '20 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 14.225 * m,
+                    max: 14.35 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '17 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 18.068 * m,
+                    max: 18.11 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '17 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 18.11 * m,
+                    max: 18.168 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '15 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 14.025 * m,
+                    max: 14.15 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '15 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 14.225 * m,
+                    max: 14.35 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '12 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 24.89 * m,
+                    max: 24.93 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '12 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 24.93 * m,
+                    max: 24.99 * m,
+                    description: 'Amateur radio band for General and higher.'
+                }, {
+                    name: '10 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 28 * m,
+                    max: 28.3 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '10 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 28.3 * m,
+                    max: 29.7 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '6 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 50 * m,
+                    max: 50.1 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '6 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 50.1 * m,
+                    max: 54 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '2 Meters-cw',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 144 * m,
+                    max: 144.1 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '2 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 144.1 * m,
+                    max: 148 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '1.25 Meters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 222 * m,
+                    max: 225 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '70 Centimeters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 420 * m,
+                    max: 450 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '33 Centimeters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 902 * m,
+                    max: 928 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '23 Centimeters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 1240 * m,
+                    max: 1300 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                }, {
+                    name: '33 Centimeters',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 902 * m,
+                    max: 928 * m,
+                    description: 'Amateur radio band for Technician and higher.'
+                },
+
+                {
+                    name: 'Ham radio frequency',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 2300 * m,
+                    max: 2310 * m,
+                    description: 'Amateur radio band for Technician and higher, see FCC Rules, Part 97.301(a).'
+                }, {
+                    name: 'Ham radio frequency',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 2390 * m,
+                    max: 2450 * m,
+                    description: 'Amateur radio band for Technician and higher, see FCC Rules, Part 97.301(a).'
+                }, {
+                    name: 'Ham radio frequency',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 3300 * m,
+                    max: 3500 * m,
+                    description: 'Amateur radio band for Technician and higher, see FCC Rules, Part 97.301(a).'
+                }, {
+                    name: 'Ham radio frequency',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 5650 * m,
+                    max: 5925 * m,
+                    description: 'Amateur radio band for Technician and higher, see FCC Rules, Part 97.301(a).'
+                }, {
+                    name: 'Ham radio frequency',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 10000 * m,
+                    max: 10500 * m,
+                    description: 'Amateur radio band for Technician and higher, see FCC Rules, Part 97.301(a).'
+                }, {
+                    name: 'Ham radio frequency',
+                    link: 'http://www.arrl.org/frequency-allocations',
+                    min: 24000 * m,
+                    max: 24250 * m,
+                    description: 'Amateur radio band for Technician and higher, see FCC Rules, Part 97.301(a).'
+                }, {
+                    name: 'Broadcast FM Radio',
+                    link: 'https://www.fcc.gov/media/radio/fm-query',
+                    min: 88 * m,
+                    max: 108 * m,
+                    description: 'Radio station broadcasts'
+                }
+            ];
+        (function() {
+            function display() {
+                var freq = 1000000 * document.getElementById('FreqInput').value;
+                var output = '';
+
+                _.each(ranges, function(obj) {
+                    if (freq >= obj.min && freq <= obj.max) {
+                        output += "<p><h2>" + obj.name + "</h2> (" + (obj.min / 1000000) + "mhz - " + (obj.max / 1000000) + "mhz)<br><a href='" + obj.link + "'>" + obj.description + "</a></p>"
+                    }
+                });
+
+                document.getElementById('frqResults').innerHTML = output;
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('FreqInput').addEventListener('change', display);
+                document.getElementById('FreqInput').addEventListener('keyup', display);
+            });
+
+        })();
+    </script>
+</head>
+
+<body>
+    Who done it? What is that frequency?
+    <input type="text" id="FreqInput" />Mhz
+    <div id="frqResults"></div>
+</body>
+
+</html>
