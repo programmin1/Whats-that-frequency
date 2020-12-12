@@ -216,7 +216,23 @@
                     max: 108 * m,
                     description: 'Radio station broadcasts'
                 }
-            ];
+            ],
+            frequencies = [{
+                name: 'AM calling frequency',
+                link: 'https://qrznow.com/ham-radio-frequency-chart/',
+                freq: 14.286 * m,
+                description: 'AM calling frequency'
+            }, {
+                name: 'National Simplex Calling Frequency',
+                link: 'https://qrznow.com/ham-radio-frequency-chart/',
+                freq: 146.52 * m,
+                description: 'National Simplex Calling Frequency'
+            }, {
+                name: 'National simplex frequency',
+                link: 'https://qrznow.com/ham-radio-frequency-chart/',
+                freq: 446 * m,
+                description: 'National simplex frequency'
+            }];
         (function() {
             function display() {
                 var freq = 1000000 * document.getElementById('FreqInput').value;
@@ -224,7 +240,12 @@
 
                 _.each(ranges, function(obj) {
                     if (freq >= obj.min && freq <= obj.max) {
-                        output += "<p><h2>" + obj.name + "</h2> (" + (obj.min / 1000000) + "mhz - " + (obj.max / 1000000) + "mhz)<br><a href='" + obj.link + "'>" + obj.description + "</a></p>"
+                        output += "<p><h2>" + obj.name + "</h2> (" + (obj.min / 1000000) + "Mhz - " + (obj.max / 1000000) + "mhz)<br><a href='" + obj.link + "'>" + obj.description + "</a></p>"
+                    }
+                });
+                _.each(frequencies, function(obj) {
+                    if (freq == obj.freq) {
+                        output += "<p><h2>" + obj.name + "</h2> (" + (obj.freq / 1000000) + "Mhz)<br><a href='" + obj.link + "'>" + obj.description + "</a></p>";
                     }
                 });
 
