@@ -238,6 +238,13 @@
                 var freq = 1000000 * document.getElementById('FreqInput').value;
                 var output = '';
 
+                if (window.repeaters) {
+                    _.each(repeaters, function(obj) {
+                        if (freq == obj.freq || freq == obj.input) {
+                            output += "<p><h2>" + obj.name + "</h2> (" + (obj.freq / 1000000) + "Mhz, " + (obj.input / 1000000) + "Mhz)<br><a href='/repeaters/" + obj.id + "'>(See details)</a></p>";
+                        }
+                    });
+                }
                 _.each(ranges, function(obj) {
                     if (freq >= obj.min && freq <= obj.max) {
                         output += "<p><h2>" + obj.name + "</h2> (" + (obj.min / 1000000) + "Mhz - " + (obj.max / 1000000) + "mhz)<br><a href='" + obj.link + "'>" + obj.description + "</a></p>"
