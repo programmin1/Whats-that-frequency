@@ -261,7 +261,50 @@
             document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('FreqInput').addEventListener('change', display);
                 document.getElementById('FreqInput').addEventListener('keyup', display);
+                document.getElementById('FreqLower').addEventListener('click', function() {
+                    var freq = 1000000 * document.getElementById('FreqInput').value;
+                    var nextfreq = freq;
+                    var off = 9E9;
+                    if (window.repeaters) {
+                        _.each(repeaters, function(obj) {
+                            if (freq > obj.freq && Math.abs(freq - obj.freq) < off) {
+                                nextfreq = obj.freq;
+                                off = Math.abs(freq - obj.freq);
+                            }
+                        });
+                    }
+                    _.each(frequencies, function(obj) {
+                        if (freq > obj.freq && Math.abs(freq - obj.freq) < off) {
+                            nextfreq = obj.freq;
+                            off = Math.abs(freq - obj.freq);
+                        }
+                    });
+                    document.getElementById('FreqInput').value = nextfreq / 1000000;
+                    display();
+                });
+                document.getElementById('FreqHigher').addEventListener('click', function() {
+                    var freq = 1000000 * document.getElementById('FreqInput').value;
+                    var nextfreq = freq;
+                    var off = 9E9;
+                    if (window.repeaters) {
+                        _.each(repeaters, function(obj) {
+                            if (freq < obj.freq && Math.abs(freq - obj.freq) < off) {
+                                nextfreq = obj.freq;
+                                off = Math.abs(freq - obj.freq);
+                            }
+                        });
+                    }
+                    _.each(frequencies, function(obj) {
+                        if (freq < obj.freq && Math.abs(freq - obj.freq) < off) {
+                            nextfreq = obj.freq;
+                            off = Math.abs(freq - obj.freq);
+                        }
+                    });
+                    document.getElementById('FreqInput').value = nextfreq / 1000000;
+                    display();
+                });
             });
+
 
         })();
     </script>
@@ -269,7 +312,7 @@
 
 <body>
     Who done it? What is that frequency?
-    <input type="text" id="FreqInput" />Mhz
+    <input type="text" id="FreqInput" />Mhz<a href="#" id="FreqLower">&lt;</a><a href="#" id="FreqHigher">&gt;</a>
     <div id="frqResults"></div>
 </body>
 
